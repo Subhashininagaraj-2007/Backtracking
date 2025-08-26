@@ -1,0 +1,26 @@
+class Solution {
+    public String getHappyString(int n, int k) {
+      List<String> res = new ArrayList<>();
+        char[] chars = {'a','b','c'};
+        StringBuilder sb = new StringBuilder();
+        backtrack(n, sb, res, chars);
+
+        if (k > res.size()) return "";
+        return res.get(k - 1); 
+    }
+
+    private void backtrack(int n, StringBuilder sb, List<String> res, char[] chars) {
+        if (sb.length() == n) {
+            res.add(sb.toString());
+            return;
+        }
+        for (char c : chars) {
+            int m = sb.length();
+            if (m == 0 || sb.charAt(m - 1) != c) {
+                sb.append(c);
+                backtrack(n, sb, res, chars);
+                sb.deleteCharAt(sb.length() - 1);
+            }
+        }
+    }
+}
